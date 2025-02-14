@@ -34,23 +34,23 @@ def is_venv_compatible():
 def delete_virtual_environment():
     """Deletes the existing virtual environment if it is incompatible."""
     if os.path.exists(VENV_FOLDER):
-        print("🗑️ Removing incompatible virtual environment...")
+        print("Removing incompatible virtual environment...")
         if sys.platform == "win32":
             subprocess.run(["rmdir", "/s", "/q", VENV_FOLDER], shell=True)  # Windows delete command
         else:
             subprocess.run(["rm", "-rf", VENV_FOLDER])  # macOS/Linux delete command
-        print("✅ Virtual environment removed.")
+        print("Virtual environment removed.")
 
 def create_virtual_environment():
     """Creates a fresh virtual environment and stores system info for compatibility checks."""
-    print("🔧 Creating a new virtual environment...")
+    print("Creating a new virtual environment...")
     subprocess.run([sys.executable, "-m", "venv", VENV_FOLDER])
     
     # Store the system info for future compatibility checks
     with open(SYSTEM_INFO_FILE, "w") as f:
         f.write(get_system_info())
 
-    print("✅ Virtual environment created.")
+    print("Virtual environment created.")
 
 def install_dependencies():
     """Installs dependencies from requirements.txt only if they are missing."""
@@ -58,11 +58,11 @@ def install_dependencies():
     pip_executable = os.path.join(VENV_FOLDER, "Scripts" if sys.platform == "win32" else "bin", "pip")
 
     if os.path.exists(requirements_file):
-        print("📦 Installing dependencies from requirements.txt...")
+        print("Installing dependencies from requirements.txt...")
         subprocess.run([pip_executable, "install", "-r", requirements_file])
-        print("✅ Dependencies installed.")
+        print("Dependencies installed.")
     else:
-        print("⚠️ No requirements.txt file found. Skipping dependency installation.")
+        print("No requirements.txt file found. Skipping dependency installation.")
 
 def check_dependencies():
     """Checks if required modules are installed inside the virtual environment."""
@@ -74,14 +74,14 @@ def check_dependencies():
         print(f"❌ Missing dependencies: {e}. Installing now...")
         install_dependencies()
 
-# ✅ Manage Virtual Environment
+# Manage Virtual Environment
 if not is_venv_compatible():
     delete_virtual_environment()
     create_virtual_environment()
 
-# ✅ Install dependencies and check modules
+# Install dependencies and check modules
 install_dependencies()
 check_dependencies()
 
-# 🚀 Now continue running the actual program
+# Now continue running the actual program
 print("🚀 Starting Mitutoyo Measurement Logger...")
