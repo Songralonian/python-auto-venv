@@ -1,7 +1,7 @@
 """
 Self-Managing Virtual Environment Checks & Setup Script
 *Just include at the very top (first thing) of any python script*
-*all imports can be pushed up at the top before everything else*
+
 """
 
 import os
