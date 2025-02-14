@@ -84,4 +84,4 @@ install_dependencies()
 check_dependencies()
 
 # Now continue running the actual program
-print("🚀 Starting Mitutoyo Measurement Logger...")
+print("Starting Measurement Logger...")
